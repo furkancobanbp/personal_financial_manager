@@ -8,7 +8,7 @@ import '../utils/constants.dart';
 class GoalsView extends StatefulWidget {
   final AppController appController;
 
-  const GoalsView({Key? key, required this.appController}) : super(key: key);
+  const GoalsView({super.key, required this.appController});
 
   @override
   _GoalsViewState createState() => _GoalsViewState();

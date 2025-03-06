@@ -8,8 +8,7 @@ import '../utils/constants.dart';
 class EntryFormView extends StatefulWidget {
   final AppController appController;
 
-  const EntryFormView({Key? key, required this.appController})
-    : super(key: key);
+  const EntryFormView({super.key, required this.appController});
 
   @override
   _EntryFormViewState createState() => _EntryFormViewState();

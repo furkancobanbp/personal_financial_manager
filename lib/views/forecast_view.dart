@@ -10,9 +10,9 @@ class ForecastView extends StatefulWidget {
   final AppController appController;
 
   const ForecastView({
-    Key? key,
+    super.key,
     required this.appController,
-  }) : super(key: key);
+  });
 
   @override
   _ForecastViewState createState() => _ForecastViewState();

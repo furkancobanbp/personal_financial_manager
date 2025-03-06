@@ -1,5 +1,4 @@
 // lib/models/transaction.dart
-import 'package:flutter/material.dart';
 
 enum TransactionType {
   income,

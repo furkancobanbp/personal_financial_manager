@@ -9,9 +9,9 @@ class CategoryManagerView extends StatefulWidget {
   final AppController appController;
 
   const CategoryManagerView({
-    Key? key,
+    super.key,
     required this.appController,
-  }) : super(key: key);
+  });
 
   @override
   _CategoryManagerViewState createState() => _CategoryManagerViewState();

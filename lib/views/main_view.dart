@@ -14,7 +14,7 @@ import 'entry_form_view.dart';
 import 'category_manager_view.dart';
 
 class MainView extends StatefulWidget {
-  const MainView({Key? key}) : super(key: key);
+  const MainView({super.key});
 
   @override
   _MainViewState createState() => _MainViewState();

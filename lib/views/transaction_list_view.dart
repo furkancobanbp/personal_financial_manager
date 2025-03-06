@@ -9,9 +9,9 @@ class TransactionListView extends StatefulWidget {
   final AppController appController;
 
   const TransactionListView({
-    Key? key,
+    super.key,
     required this.appController,
-  }) : super(key: key);
+  });
 
   @override
   _TransactionListViewState createState() => _TransactionListViewState();

@@ -7,23 +7,16 @@ class ForecastTransaction extends Transaction {
   final bool realized;
 
   ForecastTransaction({
-    required String id,
-    required String name,
-    required double amount,
-    required TransactionType transactionType,
-    required DateTime date,
-    String? category,
+    required super.id,
+    required super.name,
+    required super.amount,
+    required super.transactionType,
+    required super.date,
+    super.category,
     this.notes = '',
     this.actualTransactionId,
     this.realized = false,
-  }) : super(
-          id: id,
-          name: name,
-          amount: amount,
-          transactionType: transactionType,
-          date: date,
-          category: category,
-        );
+  });
 
   @override
   Map<String, dynamic> toJson() {

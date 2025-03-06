@@ -1,5 +1,4 @@
 // lib/models/financial_goal.dart
-import 'package:flutter/material.dart';
 
 enum GoalType {
   income,

@@ -10,13 +10,13 @@ class SummaryCard extends StatelessWidget {
   final bool showSign;
 
   const SummaryCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.amount,
     required this.backgroundColor,
     required this.textColor,
     this.showSign = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SummaryCard extends StatelessWidget {
     
     String formattedAmount = currencyFormat.format(amount);
     if (showSign && amount > 0) {
-      formattedAmount = '+' + formattedAmount;
+      formattedAmount = '+$formattedAmount';
     }
 
     return Card(
