@@ -1,5 +1,4 @@
 // lib/controllers/app_controller.dart
-import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import '../models/financial_goal.dart';
 import '../models/forecast_transaction.dart';
