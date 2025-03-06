@@ -1,23 +1,22 @@
 // lib/services/forecast_service.dart
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/forecast_transaction.dart';
 import '../models/transaction.dart';
 import '../utils/id_generator.dart';
+import '../utils/file_manager.dart';
 
 class ForecastService extends ChangeNotifier {
   List<ForecastTransaction> _forecasts = [];
+  static const String fileName = 'forecast_transactions.json';
+  static const String assetPath = 'assets/data/forecast_transactions.json';
   
   List<ForecastTransaction> get forecasts => List.unmodifiable(_forecasts);
 
   // Load forecasts from storage
   Future<void> loadForecasts() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString('forecasts') ?? '[]';
-    
     try {
-      final jsonList = jsonDecode(jsonString) as List;
+      final jsonList = await FileManager.readData(fileName, assetPath);
       _forecasts = jsonList.map((json) => ForecastTransaction.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {
@@ -28,9 +27,10 @@ class ForecastService extends ChangeNotifier {
 
   // Save forecasts to storage
   Future<void> saveForecasts() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = jsonEncode(_forecasts.map((f) => f.toJson()).toList());
-    await prefs.setString('forecasts', jsonString);
+    await FileManager.writeData(
+      fileName, 
+      _forecasts.map((f) => f.toJson()).toList()
+    );
   }
 
   // Add a new forecast

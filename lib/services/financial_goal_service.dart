@@ -1,22 +1,21 @@
 // lib/services/financial_goal_service.dart
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/financial_goal.dart';
 import '../utils/id_generator.dart';
+import '../utils/file_manager.dart';
 
 class FinancialGoalService extends ChangeNotifier {
   List<FinancialGoal> _goals = [];
+  static const String fileName = 'financial_goals.json';
+  static const String assetPath = 'assets/data/financial_goals.json';
   
   List<FinancialGoal> get goals => List.unmodifiable(_goals);
 
   // Load goals from storage
   Future<void> loadGoals() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString('financial_goals') ?? '[]';
-    
     try {
-      final jsonList = jsonDecode(jsonString) as List;
+      final jsonList = await FileManager.readData(fileName, assetPath);
       _goals = jsonList.map((json) => FinancialGoal.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {
@@ -27,9 +26,10 @@ class FinancialGoalService extends ChangeNotifier {
 
   // Save goals to storage
   Future<void> saveGoals() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = jsonEncode(_goals.map((g) => g.toJson()).toList());
-    await prefs.setString('financial_goals', jsonString);
+    await FileManager.writeData(
+      fileName, 
+      _goals.map((g) => g.toJson()).toList()
+    );
   }
 
   // Add a new goal

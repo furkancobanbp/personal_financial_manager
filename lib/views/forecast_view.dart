@@ -5,6 +5,7 @@ import '../controllers/app_controller.dart';
 import '../models/forecast_transaction.dart';
 import '../models/transaction.dart';
 import '../utils/constants.dart';
+import '../widgets/forecast_comparison_chart.dart';
 
 class ForecastView extends StatefulWidget {
   final AppController appController;
@@ -465,7 +466,34 @@ class _ForecastViewState extends State<ForecastView> with SingleTickerProviderSt
               ],
             ),
             
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
+            
+            // Chart visualization
+            Card(
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Visual Comparison - ${DateFormat('MMMM yyyy').format(DateTime(_selectedYear, _selectedMonth))}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 250,
+                      child: ForecastComparisonChart(comparisonData: comparison),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 16),
             
             // Summary card
             Card(

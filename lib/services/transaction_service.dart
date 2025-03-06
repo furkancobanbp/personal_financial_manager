@@ -1,22 +1,21 @@
 // lib/services/transaction_service.dart
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transaction.dart';
 import '../utils/id_generator.dart';
+import '../utils/file_manager.dart';
 
 class TransactionService extends ChangeNotifier {
   List<Transaction> _transactions = [];
+  static const String fileName = 'finance_data.json';
+  static const String assetPath = 'assets/data/finance_data.json';
   
   List<Transaction> get transactions => List.unmodifiable(_transactions);
 
   // Load transactions from storage
   Future<void> loadTransactions() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString('transactions') ?? '[]';
-    
     try {
-      final jsonList = jsonDecode(jsonString) as List;
+      final jsonList = await FileManager.readData(fileName, assetPath);
       _transactions = jsonList.map((json) => Transaction.fromJson(json)).toList();
       notifyListeners();
     } catch (e) {
@@ -27,9 +26,10 @@ class TransactionService extends ChangeNotifier {
 
   // Save transactions to storage
   Future<void> saveTransactions() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = jsonEncode(_transactions.map((t) => t.toJson()).toList());
-    await prefs.setString('transactions', jsonString);
+    await FileManager.writeData(
+      fileName, 
+      _transactions.map((t) => t.toJson()).toList()
+    );
   }
 
   // Add a new transaction

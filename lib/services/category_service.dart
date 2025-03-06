@@ -1,8 +1,8 @@
 // lib/services/category_service.dart
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transaction.dart';
+import '../utils/file_manager.dart';
 
 class Category {
   final String name;
@@ -29,16 +29,15 @@ class Category {
 
 class CategoryService extends ChangeNotifier {
   List<Category> _categories = [];
+  static const String fileName = 'transaction_categories.json';
+  static const String assetPath = 'assets/data/transaction_categories.json';
   
   List<Category> get categories => List.unmodifiable(_categories);
 
   // Load categories from storage
   Future<void> loadCategories() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString('categories') ?? '[]';
-    
     try {
-      final jsonList = jsonDecode(jsonString) as List;
+      final jsonList = await FileManager.readData(fileName, assetPath);
       _categories = jsonList.map((json) => Category.fromJson(json)).toList();
       
       // Add default categories if none exist
@@ -56,9 +55,10 @@ class CategoryService extends ChangeNotifier {
 
   // Save categories to storage
   Future<void> saveCategories() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonString = jsonEncode(_categories.map((c) => c.toJson()).toList());
-    await prefs.setString('categories', jsonString);
+    await FileManager.writeData(
+      fileName, 
+      _categories.map((c) => c.toJson()).toList()
+    );
   }
 
   // Add default categories
