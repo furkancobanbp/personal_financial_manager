@@ -241,7 +241,7 @@ class _EntryFormViewState extends State<EntryFormView> {
       initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
-      initialDatePickerMode: DatePickerMode.year,
+      
     );
 
     if (pickedDate != null) {

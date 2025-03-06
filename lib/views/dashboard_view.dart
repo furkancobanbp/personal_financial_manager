@@ -50,46 +50,100 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Period selector
-          Row(
-            children: [
-              const Text('Year:', style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(width: 8),
-              DropdownButton<int>(
-                value: _selectedYear,
-                items: years.map((year) {
-                  return DropdownMenuItem<int>(
-                    value: year,
-                    child: Text(year.toString()),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  if (value != null) {
-                    setState(() {
-                      _selectedYear = value;
-                    });
-                  }
-                },
+          Card(
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Select Period:',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      // Month selector
+                      Expanded(
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            labelText: 'Month',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<int>(
+                              isExpanded: true,
+                              value: _selectedMonth,
+                              isDense: true,
+                              items: List.generate(12, (index) {
+                                return DropdownMenuItem<int>(
+                                  value: index + 1,
+                                  child: Text(DateFormat('MMMM').format(DateTime(2022, index + 1))),
+                                );
+                              }),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  setState(() {
+                                    _selectedMonth = value;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                      const SizedBox(width: 16),
+                      
+                      // Year selector
+                      Expanded(
+                        child: InputDecorator(
+                          decoration: const InputDecoration(
+                            labelText: 'Year',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<int>(
+                              isExpanded: true,
+                              value: _selectedYear,
+                              isDense: true,
+                              items: years.map((year) {
+                                return DropdownMenuItem<int>(
+                                  value: year,
+                                  child: Text(year.toString()),
+                                );
+                              }).toList(),
+                              onChanged: (value) {
+                                if (value != null) {
+                                  setState(() {
+                                    _selectedYear = value;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                      const SizedBox(width: 16),
+                      
+                      // Refresh button
+                      ElevatedButton.icon(
+                        onPressed: () => setState(() {}),
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('Refresh'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              const Text('Month:', style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(width: 8),
-              DropdownButton<int>(
-                value: _selectedMonth,
-                items: List.generate(12, (index) {
-                  return DropdownMenuItem<int>(
-                    value: index + 1,
-                    child: Text(DateFormat('MMMM').format(DateTime(2022, index + 1))),
-                  );
-                }),
-                onChanged: (value) {
-                  if (value != null) {
-                    setState(() {
-                      _selectedMonth = value;
-                    });
-                  }
-                },
-              ),
-            ],
+            ),
           ),
           
           const SizedBox(height: 16),

@@ -810,7 +810,7 @@ class _ForecastViewState extends State<ForecastView> with SingleTickerProviderSt
       initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
-      initialDatePickerMode: DatePickerMode.year,
+      
     );
     
     if (pickedDate != null) {
