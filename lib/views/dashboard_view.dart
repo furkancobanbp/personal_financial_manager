@@ -9,9 +9,9 @@ class DashboardView extends StatefulWidget {
   final AppController appController;
 
   const DashboardView({
-    Key? key, 
+    super.key, 
     required this.appController,
-  }) : super(key: key);
+  });
 
   @override
   _DashboardViewState createState() => _DashboardViewState();
@@ -183,7 +183,7 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 300,
                     child: _buildMonthlyDataTable(monthlyData),
                   ),
@@ -209,7 +209,7 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 300,
                     child: Center(
                       child: Column(
@@ -255,7 +255,7 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 300,
                     child: Center(
                       child: Column(
@@ -294,7 +294,7 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 300,
                     child: Center(
                       child: Column(
@@ -368,7 +368,7 @@ class _DashboardViewState extends State<DashboardView> with SingleTickerProvider
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
+                  SizedBox(
                     height: 200,
                     child: const Center(
                       child: Text(
