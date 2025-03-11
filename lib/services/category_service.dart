@@ -1,5 +1,4 @@
 // lib/services/category_service.dart
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import '../models/transaction.dart';
 import '../utils/file_manager.dart';

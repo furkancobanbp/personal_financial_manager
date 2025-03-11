@@ -8,8 +8,8 @@ class CategoryBreakdownChart extends StatefulWidget {
   final List<Transaction> transactions;
   final List<Color> colorPalette;
 
-  CategoryBreakdownChart({
-    Key? key,
+  const CategoryBreakdownChart({
+    super.key,
     required this.transactions,
     this.colorPalette = const [
       Color(0xFFF44336), // Red
@@ -23,7 +23,7 @@ class CategoryBreakdownChart extends StatefulWidget {
       Color(0xFF795548), // Brown
       Color(0xFF607D8B), // Blue Grey
     ],
-  }) : super(key: key);
+  });
 
   @override
   State<CategoryBreakdownChart> createState() => _CategoryBreakdownChartState();

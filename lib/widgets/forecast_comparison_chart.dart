@@ -2,15 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
-import '../utils/constants.dart';
 
 class ForecastComparisonChart extends StatelessWidget {
   final Map<String, dynamic> comparisonData;
 
   const ForecastComparisonChart({
-    Key? key,
+    super.key,
     required this.comparisonData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -9,10 +9,10 @@ class CashFlowChart extends StatelessWidget {
   final int selectedYear;
 
   const CashFlowChart({
-    Key? key,
+    super.key,
     required this.monthlyData,
     required this.selectedYear,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

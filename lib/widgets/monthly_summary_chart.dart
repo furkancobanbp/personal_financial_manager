@@ -9,10 +9,10 @@ class MonthlySummaryChart extends StatelessWidget {
   final int selectedYear;
 
   const MonthlySummaryChart({
-    Key? key,
+    super.key,
     required this.monthlyData,
     required this.selectedYear,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
